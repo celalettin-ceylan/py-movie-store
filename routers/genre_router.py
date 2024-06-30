@@ -2,28 +2,27 @@ import logging
 from fastapi import APIRouter, HTTPException
 from psycopg2 import IntegrityError
 from pydantic import BaseModel
-from repositories.movie_type_repository import MovieTypeRepository
-
+from repositories.genre_repositories import GenreRepository
 
 router = APIRouter()
 
-class TypeItemIn(BaseModel):
+class GenreItemIn(BaseModel):
     name: str
 
 
-class TypeItemOut(TypeItemIn):
+class GenreItemOut(GenreItemIn):
     id: int
 
 
-@router.get("/api/movie-types")
+@router.get("/api/genres")
 def get_all():
-    types = MovieTypeRepository.get_all()
+    types = GenreRepository.get_all()
     return types
 
-@router.post("/api/movie-type")
-def create(item: TypeItemIn):
+@router.post("/api/genre")
+def create(item: GenreItemIn):
     try:
-        mtype = MovieTypeRepository.create(item.name)
+        mtype = GenreRepository.create(item.name)
     except IntegrityError as e:
         logging.error(f"Error creating movie: {e}")
         return HTTPException(status_code=203)
