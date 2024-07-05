@@ -5,11 +5,11 @@ from models.genre import Genre
 class MovieRepository:
 
     @staticmethod
-    def get_all_movies():
+    def get_all():
         return list(Movie.select())
     
     @staticmethod
-    def get_movie_by_id(id):
+    def get_by_id(id):
         return Movie.get_or_none(id = id)
     
     @staticmethod
