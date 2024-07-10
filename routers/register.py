@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from . import movie_router
-from . import genre_router
+from .api import movie_router
+from .api import genre_router
 
 def register_all_routers(app : FastAPI):
     app.include_router(movie_router.router)
